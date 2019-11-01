@@ -19,7 +19,8 @@ class x2nn(nn.Module):
         self.L1=nn.Linear(inputsize,100)
         self.L2=nn.Linear(100,100)
         self.L3=nn.Linear(100,outputsize)
-        self.sig=nn.Sigmoid()
+        #self.sig=nn.Sigmoid()
+        self.sig=nn.LeakyRelu(0.2)
     def forward(self,x):
         out=self.L1(x)
         out=self.sig(out)
@@ -30,7 +31,7 @@ class x2nn(nn.Module):
 
 #实例化模型
 mode=x2nn(36,16)
-ops=torch.optim.SGD(mode.parameters(),lr=0.001)
+ops=torch.optim.SGD(mode.parameters(),lr=0.001,momentum=0.9,weight_decay=0.1)
 loss_f=nn.MSELoss()
 
 #构造数据
