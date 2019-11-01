@@ -78,3 +78,11 @@ for j in range(10):
 #     print(k[0])
 #     print("*"*20)
 #     print(k[1])
+
+#保存模型验证
+torch.save(mode,"./mode.pth")
+net=torch.load('./mode.pth')
+x=torch.rand(1,1,36)
+print(net(x.cuda(cuda)))
+y=x.view(1,1,6,6)
+print(Conv(y))
