@@ -21,10 +21,12 @@ class x2nn(nn.Module):
         self.L3=nn.Linear(100,outputsize)
         #self.sig=nn.Sigmoid()
         self.sig=nn.LeakyRelu(0.2)
+        self.drop=nn.Dropout(0.8)
     def forward(self,x):
         out=self.L1(x)
         out=self.sig(out)
         out=self.L2(out)
+        out=self.drop(out)
         out=self.sig(out)
         out=self.L3(out)
         return out
